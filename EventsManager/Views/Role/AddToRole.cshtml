@@ -1,0 +1,63 @@
+﻿@using EventsManager.ViewModels
+@using EventsManager.IdentityModel
+@model AdminModel.RoleModel
+@{
+    ViewBag.Title = "AddToRole";
+}
+
+<h2>Add To Role</h2>
+
+
+
+@Html.ValidationSummary()
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="roleName" value="@Model.role.Name" />
+    <div class="panel-success">
+        <div class="panel-heading">Add User To Role '@Model.role.Name'</div>
+        <table class="table table-striped">
+            @if (Model.nonmembers.Count() == 0)
+        {
+                <tr><td>All users are members.</td></tr>
+        }
+        else
+        {
+                <tr><td>User ID</td><td>Add to Role</td></tr>
+            foreach (Users user in Model.nonmembers)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="IdsToAdd" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+        </table>
+    </div>
+
+    <div class="panel-success">
+        <div class="panel-heading">Remove User from Role '@Model.role.Name'</div>
+        <table class="table table-striped">
+            @if (Model.members.Count() == 0)
+        {
+                <tr><td>No Members.</td></tr>
+        }
+        else
+        {
+                <tr><td>User ID</td><td>Remove from Role</td></tr>
+            foreach (Users user in Model.members)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default"})

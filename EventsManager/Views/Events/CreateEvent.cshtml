@@ -1,0 +1,46 @@
+﻿@model EventsManager.ViewModels.EventsManagerModel.CreateEventModel
+@{
+    ViewBag.Title = "CreateEvent";
+}
+
+<h2>CreateEvent</h2>
+@Html.ValidationSummary(false)
+@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { @enctype = "multipart/form-data"}))
+{ 
+    @Html.TextBoxFor(a => a.event_name, new { @placeholder = "Event Name", @class = "form-control" })
+    @Html.TextBoxFor(a => a.event_location, new { @placeholder = "Event Location", @class = "form-control" })
+    <div class="input-group" date id="eventstartdate">
+        @Html.TextBoxFor(a => a.event_startdate, new { @placeholder = "Event's Start Date", @class = "form-control" })
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <div class="input-group" date id="eventenddate">
+        @Html.TextBoxFor(a => a.event_enddate, new { @placeholder = "Event's End Date", @class = "form-control" })
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    @Html.LabelFor(a => a.hasRaffle)
+    @Html.CheckBoxFor(a => a.hasRaffle)
+    @Html.LabelFor(a => a.registration_req)
+    @Html.CheckBoxFor(a => a.registration_req)
+    @Html.DropDownListFor(a => a.registration_type, new SelectList(Enum.GetValues(typeof(EventsManager.ViewModels.EventsManagerModel.RegistrationType))), "Registration Type")
+    @Html.TextBoxFor(a => a.img, new { @placeholder = "Event Banner", @class = "form-control", @type = "file"})
+    <button type="submit">Create</button>
+}
+
+<script type="text/javascript">
+    $(function () {
+        $('#eventstartdate').datetimepicker();
+        $('#eventenddate').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#eventstartdate").on("dp.change", function (e) {
+            $('#eventenddate').data("DateTimePicker").minDate(e.date);
+        });
+        $("#eventenddate").on("dp.change", function (e) {
+            $('#eventstartdate').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>

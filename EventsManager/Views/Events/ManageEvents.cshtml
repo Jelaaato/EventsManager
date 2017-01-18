@@ -1,0 +1,11 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "ManageEvents";
+}
+
+<h2>ManageEvents</h2>
+
+@foreach(var eventname in Model)
+{
+    <h3>@eventname</h3>
+}

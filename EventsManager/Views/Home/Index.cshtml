@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Welcome</h1>
+
+@if (User.IsInRole("User"))
+{
+    @*@Html.ActionLink(, "", "")*@
+    @Html.ActionLink("Create Event", "CreateEvent", "Events")
+    @Html.ActionLink("My Events", "ManageEvents", "Events")
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">@HttpContext.Current.User.Identity.Name<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+            <li><a href="@Url.Action("Logout", "Account")">Log Out</a></li>
+        </ul>
+    </div>
+}
+else
+{ 
+    @Html.ActionLink("User Administration", "Index", "Admin")
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">@HttpContext.Current.User.Identity.Name<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+            <li><a href="@Url.Action("Logout", "Account")">Log Out</a></li>
+        </ul>
+    </div>
+}
+
+

@@ -1,0 +1,13 @@
+﻿@model EventsManager.ViewModels.EventsManagerModel.ParticipantManualModel
+@{
+    ViewBag.Title = "AddParticipantManually";
+}
+
+<h2>AddParticipantManually</h2>
+
+@Html.ValidationSummary(false)
+@using (Html.BeginForm("AddParticipantManually", "Events", FormMethod.Post))
+{
+   @Html.DropDownListFor(a => a.classification, new SelectList(Enum.GetValues(typeof(EventsManager.ViewModels.EventsManagerModel.Classification))), "Classification")
+   @*@Html.TextBoxFor(a => a.others)*@
+}

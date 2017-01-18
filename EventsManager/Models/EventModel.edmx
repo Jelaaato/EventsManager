@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EventModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="event_name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="event_location" Type="varchar" MaxLength="250" />
+          <Property Name="start_datetime" Type="smalldatetime" Nullable="false" />
+          <Property Name="end_datetime" Type="smalldatetime" Nullable="false" />
+          <Property Name="event_banner" Type="varbinary(max)" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="deleted_datetime" Type="datetime" />
+          <Property Name="date_created" Type="smalldatetime" Nullable="false" />
+          <Property Name="passcode" Type="int" Nullable="false" />
+          <Property Name="email_address" Type="varchar" MaxLength="200" />
+          <Property Name="hasRaffle" Type="bit" />
+          <Property Name="registration_req" Type="bit" />
+          <Property Name="participant_count" Type="int" />
+          <Property Name="closed_flag" Type="bit" />
+          <Property Name="closed_datetime" Type="smalldatetime" />
+          <Property Name="reopen_flag" Type="bit" />
+          <Property Name="reopen_datetime" Type="smalldatetime" />
+          <Property Name="registration_type" Type="smallint" />
+          <Property Name="created_by" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Participants">
+          <Key>
+            <PropertyRef Name="participant_id" />
+          </Key>
+          <Property Name="participant_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="event_id" Type="uniqueidentifier" />
+          <Property Name="employee_number" Type="varchar" MaxLength="100" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" />
+          <Property Name="middle_name" Type="varchar" MaxLength="100" />
+          <Property Name="department_name" Type="varchar" MaxLength="200" />
+          <Property Name="position_name" Type="varchar" MaxLength="150" />
+          <Property Name="winner_flag" Type="bit" Nullable="false" />
+          <Property Name="registered_flag" Type="bit" Nullable="false" />
+          <Property Name="display_name" Type="varchar" MaxLength="350" />
+          <Property Name="registered_datetime" Type="datetime" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="manual_reg_flag" Type="bit" Nullable="false" />
+          <Property Name="winnerAgain_flag" Type="bit" Nullable="false" />
+          <Property Name="out_flag" Type="bit" Nullable="false" />
+          <Property Name="out_datetime" Type="smalldatetime" />
+          <Property Name="classification" Type="smallint" />
+          <Property Name="others" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <Association Name="FK__Participa__event__71D1E811">
+          <End Role="Events" Type="Self.Events" Multiplicity="0..1" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EventModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Participa__event__71D1E811" Association="Self.FK__Participa__event__71D1E811">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Guid" Nullable="false" />
+          <Property Name="event_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="event_location" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="start_datetime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_datetime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="event_banner" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="deleted_datetime" Type="DateTime" Precision="3" />
+          <Property Name="date_created" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="passcode" Type="Int32" Nullable="false" />
+          <Property Name="email_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="hasRaffle" Type="Boolean" />
+          <Property Name="registration_req" Type="Boolean" />
+          <Property Name="participant_count" Type="Int32" />
+          <Property Name="closed_flag" Type="Boolean" />
+          <Property Name="closed_datetime" Type="DateTime" Precision="0" />
+          <Property Name="reopen_flag" Type="Boolean" />
+          <Property Name="reopen_datetime" Type="DateTime" Precision="0" />
+          <Property Name="registration_type" Type="Int16" />
+          <Property Name="created_by" Type="String" />
+          <NavigationProperty Name="Participants" Relationship="EventModel.FK__Participa__event__71D1E811" FromRole="Event" ToRole="Participant" />
+        </EntityType>
+        <EntityContainer Name="EventsOrganizerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Participants" EntityType="EventModel.Participant" />
+          <AssociationSet Name="FK__Participa__event__71D1E811" Association="EventModel.FK__Participa__event__71D1E811">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Participant" EntitySet="Participants" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="participant_id" />
+          </Key>
+          <Property Name="participant_id" Type="Guid" Nullable="false" />
+          <Property Name="event_id" Type="Guid" />
+          <Property Name="employee_number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="middle_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="department_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="position_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="winner_flag" Type="Boolean" Nullable="false" />
+          <Property Name="registered_flag" Type="Boolean" Nullable="false" />
+          <Property Name="display_name" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="registered_datetime" Type="DateTime" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="manual_reg_flag" Type="Boolean" Nullable="false" />
+          <Property Name="winnerAgain_flag" Type="Boolean" Nullable="false" />
+          <Property Name="out_flag" Type="Boolean" Nullable="false" />
+          <Property Name="out_datetime" Type="DateTime" Precision="0" />
+          <Property Name="classification" Type="Int16" />
+          <Property Name="others" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Event" Relationship="EventModel.FK__Participa__event__71D1E811" FromRole="Participant" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK__Participa__event__71D1E811">
+          <End Type="EventModel.Event" Role="Event" Multiplicity="0..1" />
+          <End Type="EventModel.Participant" Role="Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="event_id" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventModelStoreContainer" CdmEntityContainer="EventsOrganizerEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="EventModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="event_name" ColumnName="event_name" />
+                <ScalarProperty Name="event_location" ColumnName="event_location" />
+                <ScalarProperty Name="start_datetime" ColumnName="start_datetime" />
+                <ScalarProperty Name="end_datetime" ColumnName="end_datetime" />
+                <ScalarProperty Name="event_banner" ColumnName="event_banner" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="deleted_datetime" ColumnName="deleted_datetime" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="passcode" ColumnName="passcode" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+                <ScalarProperty Name="hasRaffle" ColumnName="hasRaffle" />
+                <ScalarProperty Name="registration_req" ColumnName="registration_req" />
+                <ScalarProperty Name="participant_count" ColumnName="participant_count" />
+                <ScalarProperty Name="closed_flag" ColumnName="closed_flag" />
+                <ScalarProperty Name="closed_datetime" ColumnName="closed_datetime" />
+                <ScalarProperty Name="reopen_flag" ColumnName="reopen_flag" />
+                <ScalarProperty Name="reopen_datetime" ColumnName="reopen_datetime" />
+                <ScalarProperty Name="registration_type" ColumnName="registration_type" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="EventModel.Participant">
+              <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="others" ColumnName="others" />
+                <ScalarProperty Name="classification" ColumnName="classification" />
+                <ScalarProperty Name="out_datetime" ColumnName="out_datetime" />
+                <ScalarProperty Name="out_flag" ColumnName="out_flag" />
+                <ScalarProperty Name="winnerAgain_flag" ColumnName="winnerAgain_flag" />
+                <ScalarProperty Name="manual_reg_flag" ColumnName="manual_reg_flag" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="registered_datetime" ColumnName="registered_datetime" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="registered_flag" ColumnName="registered_flag" />
+                <ScalarProperty Name="winner_flag" ColumnName="winner_flag" />
+                <ScalarProperty Name="position_name" ColumnName="position_name" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="employee_number" ColumnName="employee_number" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="participant_id" ColumnName="participant_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

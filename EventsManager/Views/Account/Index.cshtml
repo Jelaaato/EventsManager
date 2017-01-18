@@ -1,0 +1,67 @@
+﻿@model EventsManager.ViewModels.AccountModel.LoginModel
+@{
+    Layout = null;
+    ViewBag.Title = "Login - Events Manager";
+}
+
+<!DOCTYPE html>
+
+<html class="bgcover">
+
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+<body>
+    <div class="bgcover">
+        <div class="inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text text-center">
+                        <b>Tik Tik Takoo</b>
+                    </div>
+                </div>
+                <div class="subtext text-center">
+                    <i>Events Manager</i>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3 form-box">
+                            <div class="form-bottom">
+                                <span style="color:white;">@Html.ValidationSummary(false)</span>
+                                @using (Html.BeginForm("Index", "Account", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(a => a.username, new
+                               {
+                                   @class = "input-size inputuser",
+                                   @placeholder = "Username"
+                               })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.PasswordFor(a => a.password, new
+                               {
+                                   @class = "input-size inputpass",
+                                   @placeholder = "Password"
+                               })
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-login">Login</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

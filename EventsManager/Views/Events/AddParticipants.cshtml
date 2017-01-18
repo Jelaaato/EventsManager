@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "AddParticipants";
+}
+
+<h2>AddParticipants</h2>
+
+<h4>You can now add participants to this event</h4>
+
+@Html.ActionLink("Manual", "AddParticipantManually", "Events")
+@Html.ActionLink("Upload Excel", "AddParticipantViaExcel", "Events")
+
