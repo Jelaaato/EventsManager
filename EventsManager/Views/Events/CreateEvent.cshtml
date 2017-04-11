@@ -1,40 +1,92 @@
 ﻿@model EventsManager.ViewModels.EventsManagerModel.CreateEventModel
 @{
-    ViewBag.Title = "CreateEvent";
+    ViewBag.Title = "Create Event";
 }
 
-<h2>CreateEvent</h2>
-@Html.ValidationSummary(false)
-@using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { @enctype = "multipart/form-data"}))
-{ 
-    @Html.TextBoxFor(a => a.event_name, new { @placeholder = "Event Name", @class = "form-control" })
-    @Html.TextBoxFor(a => a.event_location, new { @placeholder = "Event Location", @class = "form-control" })
-    <div class="input-group" date id="eventstartdate">
-        @Html.TextBoxFor(a => a.event_startdate, new { @placeholder = "Event's Start Date", @class = "form-control" })
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
+<body>
+    <div class="container">
+        <div class="hidden-xs hidden-sm">
+            <img src="~/Images/astro-create.jpg" width="500" height="500" style="position:absolute;top:20%;left:58%;" />
+        </div>
+        <br /><br /><br /><br />
+        <div class="row">
+                <div class="col-lg-5">
+                    <div class="create-form-bottom">
+                        @*<center><span style="color:black;text-transform:uppercase;font-size:20px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Tell us about your event</span></center>*@
+                        @*<br />*@                    
+                        @*@Html.ValidationSummary(false, null, new { @class="field-validation-error"})*@
+                        @*<br />*@
+                        @using (Html.BeginForm("CreateEvent", "Events", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group">
+                                @Html.TextBoxFor(a => a.event_name, new { @placeholder = "Event name", @class = "form-control fontStyle requiredBorder" })
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="input-group" date id="eventstartdate">
+                                    @Html.TextBoxFor(a => a.event_startdate, new { @placeholder = "Event's Start Date", @class = "requiredBorder form-control fontStyle" })
+                                    <span class="input-group-addon" style="background-color:white !important;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="input-group" date id="eventenddate">
+                                    @Html.TextBoxFor(a => a.event_enddate, new { @placeholder = "Event's End Date", @class = "requiredBorder form-control fontStyle" })
+                                    <span class="input-group-addon" style="background-color:white !important;">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.TextBoxFor(a => a.event_location, new { @placeholder = "Event Location", @class = "requiredBorder form-control fontStyle" })
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.DropDownListFor(a => a.registration_type, new SelectList(Enum.GetValues(typeof(EventsManager.ViewModels.EventsManagerModel.RegistrationType))), "Registration Type", new { @class = "requiredBorder form-control fontStyle" })
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.img, "Event Banner", new { @class = "fontStyle", style = "color:black;font-weight:400;" })
+                                @Html.LabelFor(a => a.img, "(Please upload .jpeg or .png image with 1416px x 446px resolution for better and optimized image quality.)", new { @class = "fontStyle", style = "color:black;font-weight:300;font-size:13px !important;" })
+                                @Html.TextBoxFor(a => a.img, new { @placeholder = "Event Banner", @type = "file", @accept = ".jpg, .jpeg, .png", @id="uploadBtn" })
+                            </div>
+                            
+                            <div class="form-inline hidden">
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(a => a.registration_req)
+                                    @Html.LabelFor(a => a.registration_req, "Registration is required for this event.", new { @class = "fontStyle", style = "color:black;font-weight:300;"})
+                                </div>
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(a => a.hasRaffle)
+                                    @Html.LabelFor(a => a.hasRaffle, "This event includes raffle.", new { @class = "fontStyle", style = "color:black;font-weight:300;" })
+                                </div>
+                            </div>
+                            
+                            <center>
+                                <br />
+                                <div class="form-group">
+                                    <button type="submit" class="custombtn" style="background-color:#5f968e !important;color:white !important;border:none !important;">Create</button>&nbsp;&nbsp;
+                                    <button type="button" onclick="location.href='@Url.Action("Index", "Home")'" class="custombtn">Cancel</button>
+                                </div>
+                            </center>
+                            
+                        }
+                    </div>
+                </div>
+        </div>
+        <br /><br />
     </div>
-    <div class="input-group" date id="eventenddate">
-        @Html.TextBoxFor(a => a.event_enddate, new { @placeholder = "Event's End Date", @class = "form-control" })
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>
-    @Html.LabelFor(a => a.hasRaffle)
-    @Html.CheckBoxFor(a => a.hasRaffle)
-    @Html.LabelFor(a => a.registration_req)
-    @Html.CheckBoxFor(a => a.registration_req)
-    @Html.DropDownListFor(a => a.registration_type, new SelectList(Enum.GetValues(typeof(EventsManager.ViewModels.EventsManagerModel.RegistrationType))), "Registration Type")
-    @Html.TextBoxFor(a => a.img, new { @placeholder = "Event Banner", @class = "form-control", @type = "file"})
-    <button type="submit">Create</button>
-}
+</body>
+
 
 <script type="text/javascript">
     $(function () {
         $('#eventstartdate').datetimepicker();
         $('#eventenddate').datetimepicker({
-            useCurrent: false //Important! See issue #1075
+            useCurrent: false
         });
         $("#eventstartdate").on("dp.change", function (e) {
             $('#eventenddate').data("DateTimePicker").minDate(e.date);

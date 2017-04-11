@@ -18,17 +18,17 @@ namespace EventsManager.ViewModels
 
         public class ChangePasswordModel
         {
-            [Required]
+            [Required(ErrorMessage="Old Password cannot be left empty.")]
             [DataType(DataType.Password)]
             [Display(Name = "current password")]
             public string oldpassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage="New Password cannot be left empty.")]
             [DataType(DataType.Password)]
             [Display(Name = "new password")]
             public string newpassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage="Please confirm your password.")]
             [DataType(DataType.Password)]
             [Display(Name = "confirm new password")]
             [Compare("newpassword", ErrorMessage = "The new password and confirmation password do not match.")]

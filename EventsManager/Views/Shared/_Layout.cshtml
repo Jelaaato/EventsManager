@@ -4,24 +4,78 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/hover.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/spin.js"></script>
 </head>
 <body>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
- 
+            <nav id="nav" class="modifiednav" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                            <span class="glyphicon glyphicon-chevron-down collapseicon"></span>
+                        </button>
+                        @*<a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/Images/emlogo.png" style="margin-top:-10px;"/></a>*@
+                        <a class="navbar-brand" href="@Url.Action("Index","Home")"><span class="brand">Event Manager</span></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="@Url.Action("CreateEvent","Events")">Create Event</a></li>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li><a href="@Url.Action("MyEvents","Events")">Events</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("MyEvents","Events")">My Events</a></li>
+                            }
+                            @if (User.IsInRole("User"))
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome, @HttpContext.Current.User.Identity.Name<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="background-color:#5f968e !important;">
+                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                        <li><a href="@Url.Action("Logout", "Account")">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                @*@Html.ActionLink("User Administration", "Index", "Admin")*@
+                                <li><a href="@Url.Action("Index", "Admin")">User Administration</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome, @HttpContext.Current.User.Identity.Name<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" style="background-color:transparent !important;">
+                                        <li><a class="dropdowncolor" href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                        <li><a class="dropdowncolor" href="@Url.Action("Logout", "Account")">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        @*<ul class="nav navbar-nav">
+
+                </ul>*@
+                    </div>
+                </div>
+            </nav>
+    @RenderBody()
+
+    @*<footer class="footer">
+        <div class="footer_contents">
+            <center><span class="text-muted">Copyright 2017 | hopprLab | All Rights Reserved.</span></center>
+        </div>
+    </footer>*@
 </body>
 </html>

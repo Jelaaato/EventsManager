@@ -14,11 +14,13 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
+using EventsManager.Methods;
 
 namespace EventsManager.Controllers
 {
     public class AccountController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -82,7 +84,6 @@ namespace EventsManager.Controllers
         [Authorize]
         public ActionResult Logout()
         {
-            Session.Abandon();
             AuthenticationMgr.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index");
         }

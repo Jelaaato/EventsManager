@@ -33,6 +33,7 @@ namespace EventsManager.Models
         public Nullable<System.DateTime> out_datetime { get; set; }
         public Nullable<short> classification { get; set; }
         public string others { get; set; }
+        public short registration_type { get; set; }
     
         public virtual Event Event { get; set; }
     }

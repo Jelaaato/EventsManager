@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventsManager.Methods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,18 @@ namespace EventsManager.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var currentuser = HttpContext.User.Identity.Name;
+            var userid = ManageEvents.CreatedByLoginID(currentuser);
+            var count = ManageEvents.GetMyEvents(userid).Count();
+
+            if (count != 0)
+            {
+                return RedirectToAction("MyEvents", "Events");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

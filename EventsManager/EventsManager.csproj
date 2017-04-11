@@ -44,11 +44,15 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Excel">
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
@@ -84,6 +88,14 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -141,13 +153,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\hover.css" />
+    <Content Include="Content\magic.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -162,6 +179,26 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EventModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\astro-addparticipant.jpg" />
+    <Content Include="Images\astro-changepassword.jpg" />
+    <Content Include="Images\astro-create.jpg" />
+    <Content Include="Images\astro-editevent.jpg" />
+    <Content Include="Images\astro-editparticipant.jpg" />
+    <Content Include="Images\Astro.png" />
+    <Content Include="Images\button.png" />
+    <Content Include="Images\Form.jpg" />
+    <Content Include="Images\forreport.png" />
+    <Content Include="Images\guy.png" />
+    <Content Include="Images\hopprlab_logo_text_only.png" />
+    <Content Include="Images\loginbackground.jpg" />
+    <Content Include="Images\loginBg.PNG" />
+    <Content Include="Images\mainbg.jpg" />
+    <Content Include="Images\manualicon.png" />
+    <Content Include="Images\mobilesize.jpg" />
+    <Content Include="Images\Rocket.png" />
+    <Content Include="Images\rocketman.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\uploadicon.png" />
     <Content Include="Models\EventModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EventModel.edmx</DependentUpon>
@@ -175,12 +212,12 @@
       <DependentUpon>EventModel.edmx</DependentUpon>
       <LastGenOutput>EventModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Files\EventManagerListFormat.xlsx" />
+    <Content Include="Content\Blacksword.otf" />
+    <Content Include="Content\aparaj.ttf" />
+    <Content Include="Content\HelveticaNeue.ttf" />
+    <Content Include="Content\CenturyGothic.ttf" />
     <None Include="Properties\PublishProfiles\eventsmanager.pubxml" />
-    <Content Include="Images\cityview.jpg" />
-    <Content Include="Images\colorrun.jpg" />
-    <Content Include="Images\homebg.jpg" />
-    <Content Include="Images\phonebokeh.jpg" />
-    <Content Include="Images\topview.jpg" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -195,6 +232,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\spin.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +243,8 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ParticipantsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,7 +254,8 @@
     <Compile Include="IdentityModel\RolesManager.cs" />
     <Compile Include="IdentityModel\Users.cs" />
     <Compile Include="IdentityModel\UsersManager.cs" />
-    <Compile Include="Methods\Events.cs" />
+    <Compile Include="Methods\ManageEvents.cs" />
+    <Compile Include="Methods\ManageParticipants.cs" />
     <Compile Include="Migrations\201701060717089_EventsIdentityDb.cs" />
     <Compile Include="Migrations\201701060717089_EventsIdentityDb.Designer.cs">
       <DependentUpon>201701060717089_EventsIdentityDb.cs</DependentUpon>
@@ -270,9 +311,17 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Events\CreateEvent.cshtml" />
-    <Content Include="Views\Events\AddParticipants.cshtml" />
-    <Content Include="Views\Events\ManageEvents.cshtml" />
-    <Content Include="Views\Events\AddParticipantManually.cshtml" />
+    <Content Include="Views\Events\MyEvents.cshtml" />
+    <Content Include="Views\Events\EditEvent.cshtml" />
+    <Content Include="Views\Events\LoadThumbnail.cshtml" />
+    <Content Include="Views\Participants\EditParticipant.cshtml" />
+    <Content Include="Views\Participants\MyParticipants.cshtml" />
+    <Content Include="Views\Participants\_UploadParticipants.cshtml" />
+    <Content Include="Views\Participants\_AddParticipantsManually.cshtml" />
+    <Content Include="Views\Participants\AddParticipants.cshtml" />
+    <Content Include="Views\Participants\AddManual.cshtml" />
+    <Content Include="Views\Participants\Download.cshtml" />
+    <Content Include="Views\Participants\UploadParticipantsViaExcel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -282,6 +331,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\" />
+    <Folder Include="Videos\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701060717089_EventsIdentityDb.resx">

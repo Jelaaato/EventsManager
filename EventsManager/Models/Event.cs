@@ -30,12 +30,12 @@ namespace EventsManager.Models
         public System.DateTime date_created { get; set; }
         public int passcode { get; set; }
         public string email_address { get; set; }
-        public Nullable<bool> hasRaffle { get; set; }
-        public Nullable<bool> registration_req { get; set; }
+        public bool hasRaffle { get; set; }
+        public bool registration_req { get; set; }
         public Nullable<int> participant_count { get; set; }
         public Nullable<bool> closed_flag { get; set; }
         public Nullable<System.DateTime> closed_datetime { get; set; }
-        public Nullable<bool> reopen_flag { get; set; }
+        public bool reopen_flag { get; set; }
         public Nullable<System.DateTime> reopen_datetime { get; set; }
         public Nullable<short> registration_type { get; set; }
         public string created_by { get; set; }

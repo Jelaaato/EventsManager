@@ -20,12 +20,12 @@
           <Property Name="date_created" Type="smalldatetime" Nullable="false" />
           <Property Name="passcode" Type="int" Nullable="false" />
           <Property Name="email_address" Type="varchar" MaxLength="200" />
-          <Property Name="hasRaffle" Type="bit" />
-          <Property Name="registration_req" Type="bit" />
+          <Property Name="hasRaffle" Type="bit" Nullable="false" />
+          <Property Name="registration_req" Type="bit" Nullable="false" />
           <Property Name="participant_count" Type="int" />
           <Property Name="closed_flag" Type="bit" />
           <Property Name="closed_datetime" Type="smalldatetime" />
-          <Property Name="reopen_flag" Type="bit" />
+          <Property Name="reopen_flag" Type="bit" Nullable="false" />
           <Property Name="reopen_datetime" Type="smalldatetime" />
           <Property Name="registration_type" Type="smallint" />
           <Property Name="created_by" Type="nvarchar" MaxLength="128" />
@@ -51,6 +51,7 @@
           <Property Name="winnerAgain_flag" Type="bit" Nullable="false" />
           <Property Name="out_flag" Type="bit" Nullable="false" />
           <Property Name="out_datetime" Type="smalldatetime" />
+          <Property Name="registration_type" Type="smallint" Nullable="false" />
           <Property Name="classification" Type="smallint" />
           <Property Name="others" Type="varchar" MaxLength="150" />
         </EntityType>
@@ -93,15 +94,15 @@
           <Property Name="date_created" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="passcode" Type="Int32" Nullable="false" />
           <Property Name="email_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="hasRaffle" Type="Boolean" />
-          <Property Name="registration_req" Type="Boolean" />
+          <Property Name="hasRaffle" Type="Boolean" Nullable="false" />
+          <Property Name="registration_req" Type="Boolean" Nullable="false" />
           <Property Name="participant_count" Type="Int32" />
           <Property Name="closed_flag" Type="Boolean" />
           <Property Name="closed_datetime" Type="DateTime" Precision="0" />
-          <Property Name="reopen_flag" Type="Boolean" />
+          <Property Name="reopen_flag" Type="Boolean" Nullable="false" />
           <Property Name="reopen_datetime" Type="DateTime" Precision="0" />
           <Property Name="registration_type" Type="Int16" />
-          <Property Name="created_by" Type="String" />
+          <Property Name="created_by" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Participants" Relationship="EventModel.FK__Participa__event__71D1E811" FromRole="Event" ToRole="Participant" />
         </EntityType>
         <EntityContainer Name="EventsOrganizerEntities" annotation:LazyLoadingEnabled="true">
@@ -136,6 +137,7 @@
           <Property Name="classification" Type="Int16" />
           <Property Name="others" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Event" Relationship="EventModel.FK__Participa__event__71D1E811" FromRole="Participant" ToRole="Event" />
+          <Property Name="registration_type" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="FK__Participa__event__71D1E811">
           <End Type="EventModel.Event" Role="Event" Multiplicity="0..1" />
@@ -184,6 +186,7 @@
           <EntitySetMapping Name="Participants">
             <EntityTypeMapping TypeName="EventModel.Participant">
               <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="registration_type" ColumnName="registration_type" />
                 <ScalarProperty Name="others" ColumnName="others" />
                 <ScalarProperty Name="classification" ColumnName="classification" />
                 <ScalarProperty Name="out_datetime" ColumnName="out_datetime" />
