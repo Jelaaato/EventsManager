@@ -57,10 +57,14 @@
                                 <li><a href="@Url.Action("Index", "Admin")">User Administration</a></li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown">Welcome, @HttpContext.Current.User.Identity.Name<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" style="background-color:transparent !important;">
+                                    <ul class="dropdown-menu" style="background-color:#5f968e !important;">
+                                        <li><a href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
+                                        <li><a href="@Url.Action("Logout", "Account")">Log Out</a></li>
+                                    </ul>
+                                    @*<ul class="dropdown-menu" style="background-color:transparent !important;">
                                         <li><a class="dropdowncolor" href="@Url.Action("ChangePassword","Account")">Change Password</a></li>
                                         <li><a class="dropdowncolor" href="@Url.Action("Logout", "Account")">Log Out</a></li>
-                                    </ul>
+                                    </ul>*@
                                 </li>
                             }
                         </ul>
